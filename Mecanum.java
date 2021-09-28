@@ -1,21 +1,3 @@
-package org.firstinspires.ftc.teamcode;
-
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.I2cAddr;
-
-@TeleOp(name="Mecanum Wheels")
-
-public class Mecanum extends LinearOpMode {
-    double x;
-    double y;
-    double p;
-    double x2;
     // x is value of wheels, back is -x,  y+x y-x
     DcMotor frontLeft;
     DcMotor frontRight;
@@ -37,22 +19,26 @@ public class Mecanum extends LinearOpMode {
             //frontRight.setPower(Range.clip(y - (0.5 * x), -1.0, 1.0));
             //backLeft.setPower(Range.clip(-y + (0.5 * x), -1.0, 1.0));
             //backRight.setPower(Range.clip(y + (0.5 * x), -1.0, 1.0));
-            if(x > y){
-                frontLeft.setPower(Range.clip(-x, -1.0, 1.0));
+            if(abs(x) > abs(y) && abs(x) > abs(x2)){
+                frontLeft.setPower(Range.clip(x, -1.0, 1.0));
                 frontRight.setPower(Range.clip(-x, -1.0, 1.0));
                 backLeft.setPower(Range.clip(x, -1.0, 1.0));
                 backRight.setPower(Range.clip(x, -1.0, 1.0));
-            } else if(y > x){
+            } else if(abs(y) > abs(x) && abs(y) > abs(x2)){
                 frontLeft.setPower(Range.clip(-y, -1.0, 1.0));
-                frontRight.setPower(Range.clip(y, -1.0, 1.0));
-                backLeft.setPower(Range.clip(-y, -1.0, 1.0));
-                backRight.setPower(Range.clip(y, -1.0, 1.0));
-            } else if(x2 > x && x2 > y){
-                frontLeft.setPower(Range.clip(x2, -1.0, 1.0));
+                frontRight.setPower(Range.clip(-y, -1.0, 1.0));
+                backLeft.setPower(Range.clip(y, -1.0, 1.0));
+                backRight.setPower(Range.clip(-y, -1.0, 1.0));
+            } else if(abs(x2) > abs(x) && abs(x2) > abs(y)){
+                frontLeft.setPower(Range.clip(-x2, -1.0, 1.0));
                 frontRight.setPower(Range.clip(x2, -1.0, 1.0));
                 backLeft.setPower(Range.clip(x2, -1.0, 1.0));
                 backRight.setPower(Range.clip(x2, -1.0, 1.0));
             }
+            frontLeft.setPower(0);
+            frontRight.setPower(0);
+            backLeft.setPower(0);
+            backRight.setPower(0);
         }
     }
 
