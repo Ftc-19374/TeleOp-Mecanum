@@ -1,4 +1,4 @@
 Motor port 0 - GoBilda 5202 series "frontRight"
-port 1 - "br"
-2 - bl
-3 fl
+Motor port 1 - GoBilda 5202 series "backRight"
+Motor port 2 - GoBilda 5202 series "backLeft"
+Motor port 3 - GoBilda 5202 series "frontLeft"
